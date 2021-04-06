@@ -1,11 +1,6 @@
-// 4c8136706e698d46b243dfd2b9c7d5ac
 var searchForm = document.querySelector("#search-form");
 var searchTermInput = document.querySelector("#search-term");
 var currentWeather = document.querySelector("#current-weather");
-var citySpan = document.querySelector("#result-city");
-var tempSpan = document.querySelector("#result-temp");
-var humiditySpan = document.querySelector("#result-humidity");
-var windspeedSpan = document.querySelector("#result-windspeed");
 
 //api key
 const apiKey = "4c8136706e698d46b243dfd2b9c7d5ac";
@@ -13,7 +8,7 @@ const apiKey = "4c8136706e698d46b243dfd2b9c7d5ac";
 searchForm.addEventListener("submit", function(event) {
     event.preventDefault();
     var searchTerm = searchTermInput.value;
-    
+
     showCurrentWeather(searchTerm);
     showForecast(searchTerm)
 
@@ -39,7 +34,7 @@ const showCurrentWeather = (cityName) => {
         return response.json();
       })
       .then(function (data) {
-        // for(var i = 0; i < data.length; i++) {
+        
             var cityH2 = document.createElement("h2");
             cityH2.textContent = data.name;
             currentWeather.append(cityH2);
@@ -71,7 +66,7 @@ const showCurrentWeather = (cityName) => {
         console.log(data.main.temp);
         console.log(data.main.humidity);
         console.log(data.wind.speed);
-        // };
+        
         
       })
 }
@@ -93,10 +88,10 @@ const showForecast = (cityName) => {
         console.log("*******filtered data: ",filteredData );
         
         //loop through data and build string
-        let tempalteForecast = "";
+        let templateForecast = "";
 
         filteredData.forEach((datum) => {
-            tempalteForecast += `
+            templateForecast += `
                 <div>
                     <div>${new Date(datum.dt_txt).toLocaleDateString()}</div>
                     <div class="temp">Temperature: ${datum.main.temp} F</div>
@@ -107,26 +102,9 @@ const showForecast = (cityName) => {
         });
 
         //show the data on the page
-        document.querySelector("#forecast div").innerHTML = tempalteForecast;
+        document.querySelector("#forecast div").innerHTML = templateForecast;
 
       })
 }
 
-
-// function getApi() {
-    
-  
-//     fetch(requestUrl)
-//       .then(function (response) {
-//         return response.json();
-//       })
-//       .then(function (data) {
-        // console.log(data.city.name);
-//         // for (var i = 0; i < data.length; i++) {
-//         //     console.log(data.city.name);
-//         // };
-//       })
-// }
-
-// getApi();
 
