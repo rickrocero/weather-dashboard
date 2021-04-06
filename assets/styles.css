@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: grey;
+    color: white;
+    height: 75px;
+}
+
+.aside-header {
+    color: black;
+}
+
+.aside-text {
+    display: flex;
+}
+
+.main-section {
+    display: flex;
+}
+
+.weather-section {
+    width: 70%;
+}
+
+#search-form {
+    width: 30%;
+}
+
+#current-weather {
+    height: 300px;
+    background-color: cornflowerblue;
+}
+
+#forecast {
+    height: 300px;
+    background-color: lightseagreen;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/styles.css">
+    
+    <title>Rick's Weather Dashboard</title>
+</head>
+<body>
+<header>
+    <h1 class="header">Weather Dashboard</h1>
+</header>
+<main class="main-section">
+    <form id="search-form">
+        <h2 class="aside-header">Search for a City:</h2>
+        <div class="aside-text">
+            <input type="text" name="q" id="search-term" placeholder="city">
+            <div class="city-btn-container"></div>
+            <div>  
+                <button class="material-icons">pageview</button>
+            </div>  
+        </div>
+    </form>
+    <div class="weather-section">
+        <section>
+            <div id="current-weather">
+                
+            </div>
+        </section>
+        <section id="forecast">
+            <p>5-day forecast goes here</p>
+            <div>
+
+            </div>
+        </section>
+    </div>
+</main>
+<script src="./assets/script.js"></script>
+</body>
+</html>
