@@ -1,31 +1,58 @@
-var searchForm = document.querySelector("#search-form");
+var searchForm = document.querySelector(".material-icons");
 var searchTermInput = document.querySelector("#search-term");
 var currentWeather = document.querySelector("#current-weather");
+//var places = localStorage.getItem("city-searches");
 
 //api key
 const apiKey = "4c8136706e698d46b243dfd2b9c7d5ac";
 
-searchForm.addEventListener("submit", function(event) {
-    event.preventDefault();
-    var searchTerm = searchTermInput.value;
+const createCityButton = (cityName) => {
+  
+  var div = document.createElement("div");
+  //create ciy btn template
+  let tempalte = `<button class="city-btn">${cityName}</button>`;
+  
+  div.innerHTML = tempalte;
+  
+  //add this to the page
+  document.querySelector(".city-btn-container").append(div);
+}
 
-    showCurrentWeather(searchTerm);
-    showForecast(searchTerm)
+document.addEventListener("DOMContentLoaded", function() {
+  var history = JSON.parse(localStorage.getItem("city-searches")) || [];
+  console.log("history", history);
+  if (history.length > 0) {
+    for (var i = 0; i < history.length; i++) {
+      createCityButton(history[i]);
+    }
+  }
+})
 
-    //create a city button
-    createCityButton(searchTerm)
+searchForm.addEventListener("click", function(event) {
+  event.preventDefault();
+  var searchTerm = searchTermInput.value;
+  
+  showCurrentWeather(searchTerm);
+  showForecast(searchTerm)
+  
+  //create a city button
+  createCityButton(searchTerm)
+  
+  var history = JSON.parse(localStorage.getItem("city-searches")) || [];
+  history.push(searchTerm);
+  
+  //set search input to local storage
+  localStorage.setItem("city-searches", JSON.stringify(history));
 });
 
-const createCityButton = (cityName) => {
-    //create ciy btn template
-    let tempalte = `<button class="city-btn">${cityName}</button>`;
 
-    //add this to the page
-    document.querySelector(".city-btn-container").innerHTML = tempalte;
-
-    //add the evenlistener
-
-}
+document.querySelector(".city-btn-container").addEventListener("click",function(e) {
+  e.preventDefault();
+  if (e.target.className.indexOf("city-btn") > -1) {
+    showCurrentWeather(e.target.textContent);
+    showForecast(e.target.textContent)
+  }
+});
 
 const showCurrentWeather = (cityName) => {
     var urlToFetch = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}`
@@ -34,6 +61,8 @@ const showCurrentWeather = (cityName) => {
         return response.json();
       })
       .then(function (data) {
+
+        currentWeather.innerHTML = null;
         
             var cityH2 = document.createElement("h2");
             cityH2.textContent = data.name;
